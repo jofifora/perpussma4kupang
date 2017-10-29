@@ -8,6 +8,9 @@ class T_pengembalian extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata("logged_in")) {
+            redirect("Auth");
+        }
         $this->load->model('T_pengembalian_model');
         $this->load->library('form_validation');
     }
@@ -40,7 +43,9 @@ class T_pengembalian extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
+        $this->load->view('header');
         $this->load->view('t_pengembalian/t_pengembalian_list', $data);
+        $this->load->view('footer');
     }
 
     public function read($id) 
@@ -53,7 +58,9 @@ class T_pengembalian extends CI_Controller
 		'tanggal_pengembalian' => $row->tanggal_pengembalian,
 		'denda' => $row->denda,
 	    );
+            $this->load->view('header');
             $this->load->view('t_pengembalian/t_pengembalian_read', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_pengembalian'));
@@ -70,7 +77,9 @@ class T_pengembalian extends CI_Controller
 	    'tanggal_pengembalian' => set_value('tanggal_pengembalian'),
 	    'denda' => set_value('denda'),
 	);
+        $this->load->view('header');
         $this->load->view('t_pengembalian/t_pengembalian_form', $data);
+        $this->load->view('footer');
     }
     
     public function create_action() 
@@ -105,7 +114,9 @@ class T_pengembalian extends CI_Controller
 		'tanggal_pengembalian' => set_value('tanggal_pengembalian', $row->tanggal_pengembalian),
 		'denda' => set_value('denda', $row->denda),
 	    );
+            $this->load->view('header');
             $this->load->view('t_pengembalian/t_pengembalian_form', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_pengembalian'));

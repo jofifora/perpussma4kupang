@@ -8,6 +8,9 @@ class T_konstanta extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata("logged_in")) {
+            redirect("Auth");
+        }
         $this->load->model('T_konstanta_model');
         $this->load->library('form_validation');
     }

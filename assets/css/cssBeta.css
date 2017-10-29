@@ -1,6 +1,8 @@
 body {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .starter-template {
   padding: 40px 15px;
@@ -23,3 +25,4 @@ footer .footer-below {
   -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
           box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 }
+

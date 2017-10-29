@@ -8,6 +8,9 @@ class T_peminjaman extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata("logged_in")) {
+            redirect("Auth");
+        }
         $this->load->model('T_peminjaman_model');
         $this->load->library('form_validation');
     }
@@ -40,7 +43,9 @@ class T_peminjaman extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
+        $this->load->view('header');
         $this->load->view('t_peminjaman/t_peminjaman_list', $data);
+        $this->load->view('footer');
     }
 
     public function read($id) 
@@ -53,7 +58,9 @@ class T_peminjaman extends CI_Controller
 		'id_anggota' => $row->id_anggota,
 		'tanggal_pinjam' => $row->tanggal_pinjam,
 	    );
+            $this->load->view('header');
             $this->load->view('t_peminjaman/t_peminjaman_read', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_peminjaman'));
@@ -70,7 +77,9 @@ class T_peminjaman extends CI_Controller
 	    'id_anggota' => set_value('id_anggota'),
 	    'tanggal_pinjam' => set_value('tanggal_pinjam'),
 	);
+        $this->load->view('header');
         $this->load->view('t_peminjaman/t_peminjaman_form', $data);
+        $this->load->view('footer');
     }
     
     public function create_action() 
@@ -105,7 +114,9 @@ class T_peminjaman extends CI_Controller
 		'id_anggota' => set_value('id_anggota', $row->id_anggota),
 		'tanggal_pinjam' => set_value('tanggal_pinjam', $row->tanggal_pinjam),
 	    );
+            $this->load->view('header');
             $this->load->view('t_peminjaman/t_peminjaman_form', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_peminjaman'));

@@ -1,16 +1,4 @@
-<!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <style>
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
-        <h2 style="margin-top:0px">T_admin List</h2>
+        <h2 style="margin-top:20px">T_admin List</h2>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('t_admin/create'),'Create', 'class="btn btn-primary"'); ?>
@@ -81,5 +69,3 @@
                 <?php echo $pagination ?>
             </div>
         </div>
-    </body>
-</html>

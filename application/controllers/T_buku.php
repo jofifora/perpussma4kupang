@@ -8,6 +8,9 @@ class T_buku extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata("logged_in")) {
+            redirect("Auth");
+        }
         $this->load->model('T_buku_model');
         $this->load->library('form_validation');
     }
@@ -40,7 +43,9 @@ class T_buku extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
+        $this->load->view('header');
         $this->load->view('t_buku/t_buku_list', $data);
+        $this->load->view('footer');
     }
 
     public function read($id) 
@@ -57,7 +62,9 @@ class T_buku extends CI_Controller
 		'eksemplar' => $row->eksemplar,
 		'ebook' => $row->ebook,
 	    );
+            $this->load->view('header');
             $this->load->view('t_buku/t_buku_read', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_buku'));
@@ -69,16 +76,18 @@ class T_buku extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('t_buku/create_action'),
-	    'id_buku' => set_value('id_buku'),
-	    'judul_buku' => set_value('judul_buku'),
-	    'id_kategori' => set_value('id_kategori'),
-	    'id_rak' => set_value('id_rak'),
-	    'tahun' => set_value('tahun'),
-	    'stok' => set_value('stok'),
-	    'eksemplar' => set_value('eksemplar'),
-	    'ebook' => set_value('ebook'),
+    	    'id_buku' => set_value('id_buku'),
+    	    'judul_buku' => set_value('judul_buku'),
+    	    'id_kategori' => set_value('id_kategori'),
+    	    'id_rak' => set_value('id_rak'),
+    	    'tahun' => set_value('tahun'),
+    	    'stok' => set_value('stok'),
+    	    'eksemplar' => set_value('eksemplar'),
+    	    'ebook' => set_value('ebook'),
 	);
+        $this->load->view('header');
         $this->load->view('t_buku/t_buku_form', $data);
+        $this->load->view('footer');
     }
     
     public function create_action() 
@@ -89,14 +98,14 @@ class T_buku extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'judul_buku' => $this->input->post('judul_buku',TRUE),
-		'id_kategori' => $this->input->post('id_kategori',TRUE),
-		'id_rak' => $this->input->post('id_rak',TRUE),
-		'tahun' => $this->input->post('tahun',TRUE),
-		'stok' => $this->input->post('stok',TRUE),
-		'eksemplar' => $this->input->post('eksemplar',TRUE),
-		'ebook' => $this->input->post('ebook',TRUE),
-	    );
+            		'judul_buku' => $this->input->post('judul_buku',TRUE),
+            		'id_kategori' => $this->input->post('id_kategori',TRUE),
+            		'id_rak' => $this->input->post('id_rak',TRUE),
+            		'tahun' => $this->input->post('tahun',TRUE),
+            		'stok' => $this->input->post('stok',TRUE),
+            		'eksemplar' => $this->input->post('eksemplar',TRUE),
+            		'ebook' => $this->input->post('ebook',TRUE),
+            	    );
 
             $this->T_buku_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -112,16 +121,18 @@ class T_buku extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('t_buku/update_action'),
-		'id_buku' => set_value('id_buku', $row->id_buku),
-		'judul_buku' => set_value('judul_buku', $row->judul_buku),
-		'id_kategori' => set_value('id_kategori', $row->id_kategori),
-		'id_rak' => set_value('id_rak', $row->id_rak),
-		'tahun' => set_value('tahun', $row->tahun),
-		'stok' => set_value('stok', $row->stok),
-		'eksemplar' => set_value('eksemplar', $row->eksemplar),
-		'ebook' => set_value('ebook', $row->ebook),
-	    );
+        		'id_buku' => set_value('id_buku', $row->id_buku),
+        		'judul_buku' => set_value('judul_buku', $row->judul_buku),
+        		'id_kategori' => set_value('id_kategori', $row->id_kategori),
+        		'id_rak' => set_value('id_rak', $row->id_rak),
+        		'tahun' => set_value('tahun', $row->tahun),
+        		'stok' => set_value('stok', $row->stok),
+        		'eksemplar' => set_value('eksemplar', $row->eksemplar),
+        		'ebook' => set_value('ebook', $row->ebook),
+        	    );
+            $this->load->view('header');
             $this->load->view('t_buku/t_buku_form', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_buku'));

@@ -8,6 +8,9 @@ class T_rak extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata("logged_in")) {
+            redirect("Auth");
+        }
         $this->load->model('T_rak_model');
         $this->load->library('form_validation');
     }
@@ -40,7 +43,9 @@ class T_rak extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
+        $this->load->view('header');
         $this->load->view('t_rak/t_rak_list', $data);
+        $this->load->view('footer');
     }
 
     public function read($id) 
@@ -52,7 +57,9 @@ class T_rak extends CI_Controller
 		'nama_rak' => $row->nama_rak,
 		'deskripsi_rak' => $row->deskripsi_rak,
 	    );
+            $this->load->view('header');
             $this->load->view('t_rak/t_rak_read', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_rak'));
@@ -68,7 +75,9 @@ class T_rak extends CI_Controller
 	    'nama_rak' => set_value('nama_rak'),
 	    'deskripsi_rak' => set_value('deskripsi_rak'),
 	);
+        $this->load->view('header');
         $this->load->view('t_rak/t_rak_form', $data);
+        $this->load->view('footer');
     }
     
     public function create_action() 
@@ -101,7 +110,9 @@ class T_rak extends CI_Controller
 		'nama_rak' => set_value('nama_rak', $row->nama_rak),
 		'deskripsi_rak' => set_value('deskripsi_rak', $row->deskripsi_rak),
 	    );
+            $this->load->view('header');
             $this->load->view('t_rak/t_rak_form', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_rak'));
