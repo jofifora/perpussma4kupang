@@ -1,14 +1,7 @@
-    <footer class="navbar-fixed-bottom text-center">
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright &copy; www.perpustakaansma4kupang.com 2017
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+
+    <div class="footer">
+      <p>Copyright &copy; www.perpustakaansma4kupang.com 2017</p>
+    </div>
 
     <!-- Optional JavaScript -->
     <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>

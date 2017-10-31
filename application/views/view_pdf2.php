@@ -1,0 +1,1 @@
+<iframe src="http://localhost/perpustakaansma4kupang/t_ebook/read/2.html" style="position:fixed; top:60px; bottom:170px; right:0px; width: 100%; border: none; margin:0; padding:0; overflow: hidden; z-index:999999; height: 100%;" ></iframe>

@@ -16,29 +16,21 @@
         </style>
     </head>
     <body>
-        <h2>T_buku List</h2>
+        <h2>T_ebook List</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-        <th>Judul Buku</th>
-        <th>Id Kategori</th>
-        <th>Id Rak</th>
-        <th>Tahun</th>
-        <th>Stok</th>
-        <th>Eksemplar</th>
-        
+		<th>Nama Ebook</th>
+		<th>Tempat Ebook</th>
+		
             </tr><?php
-            foreach ($t_buku_data as $t_buku)
+            foreach ($t_ebook_data as $t_ebook)
             {
                 ?>
                 <tr>
-              <td><?php echo ++$start ?></td>
-              <td><?php echo $t_buku->judul_buku ?></td>
-              <td><?php echo $t_buku->id_kategori ?></td>
-              <td><?php echo $t_buku->id_rak ?></td>
-              <td><?php echo $t_buku->tahun ?></td>
-              <td><?php echo $t_buku->stok ?></td>
-              <td><?php echo $t_buku->eksemplar ?></td> 
+		      <td><?php echo ++$start ?></td>
+		      <td><?php echo $t_ebook->nama_ebook ?></td>
+		      <td><?php echo $t_ebook->tempat_ebook ?></td>	
                 </tr>
                 <?php
             }

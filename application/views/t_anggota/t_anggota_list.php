@@ -1,4 +1,56 @@
         <h2 style="margin-top:0px">T_anggota List</h2>
+        <form action="<?php echo site_url('t_anggota/index'); ?>" class="form-inline" method="get">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-right">
+                        <div class="form-group" style="margin-top: 10px">
+                            <label for="no_anggota">No. Anggota :</label>
+                            <input type="text" class="form-control" name="no_anggota" id="no_anggota" placeholder="No. Anggota" value="<?php echo $no_anggota; ?>" />
+                        </div> <br>
+                        <div class="form-group" style="margin-top: 10px">
+                            <label for="nama">Nama :</label>
+                            <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<?php echo $nama; ?>" />
+                        </div> <br>      
+                        <div class="form-group" style="margin-top: 10px">
+                            <label for="kelas">Kelas :</label>
+                            <input type="text" class="form-control" name="kelas" id="kelas" placeholder="kelas" value="<?php echo $kelas; ?>" />
+                        </div>
+                    </div>   
+                    <div class="col-md-6 text-left">   
+                        <div class="form-group" style="margin-top: 10px">
+                            <label for="jurusan">Jurusan :</label>
+                            <input type="text" class="form-control" name="jurusan" id="jurusan" placeholder="Jurusan" value="<?php echo $jurusan; ?>" />
+                        </div>                     
+                        <div class="from-group" style="margin-top: 10px">
+                            <label for="jenis_kelamin">Jenis Kelamin :</label>
+                            <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                                <option value="" <?php echo ($jenis_kelamin=="") ? "selected" : ""; ?>>Semua</option>
+                                <option value="Laki-laki" <?php echo ($jenis_kelamin=="Laki-laki") ? "selected" : ""; ?> >Laki-laki</option>
+                                <option value="Perempuan" <?php echo ($jenis_kelamin=="Perempuan") ? "selected" : ""; ?> >Perempuan</option>
+                            </select>                            
+                        </div>
+                        <div class="group-btn">
+                            <?php 
+                                if ((trim($no_anggota) <> '') || (trim($nama) <> '') || (trim($kelas) <> '') || (trim($jurusan) <> '') || (trim($jenis_kelamin) <> ''))
+                                {
+                                    ?>
+                                    <a href="<?php echo site_url('t_anggota'); ?>" class="btn btn-default" style="margin-top: 10px; margin-bottom: 10px">Reset</a>
+                                    <?php
+                                }
+                            ?>
+                          <button class="btn btn-primary" type="submit" style="margin-top: 10px; margin-bottom: 10px">Cari</button>
+                        </div>                              
+                    </div>  
+                </div>  
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                          
+                    </div>
+                </div>               
+            </div>
+        </form>
+
+
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('t_anggota/create'),'Create', 'class="btn btn-primary"'); ?>
@@ -11,22 +63,6 @@
             <div class="col-md-1 text-right">
             </div>
             <div class="col-md-3 text-right">
-                <form action="<?php echo site_url('t_anggota/index'); ?>" class="form-inline" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
-                        <span class="input-group-btn">
-                            <?php 
-                                if ($q <> '')
-                                {
-                                    ?>
-                                    <a href="<?php echo site_url('t_anggota'); ?>" class="btn btn-default">Reset</a>
-                                    <?php
-                                }
-                            ?>
-                          <button class="btn btn-primary" type="submit">Search</button>
-                        </span>
-                    </div>
-                </form>
             </div>
         </div>
         <table class="table table-bordered" style="margin-bottom: 10px">
@@ -37,7 +73,6 @@
 		<th>Kelas</th>
 		<th>Jurusan</th>
 		<th>Jenis Kelamin</th>
-		<th>Password</th>
 		<th>Action</th>
             </tr><?php
             foreach ($t_anggota_data as $t_anggota)
@@ -50,7 +85,6 @@
 			<td><?php echo $t_anggota->kelas ?></td>
 			<td><?php echo $t_anggota->jurusan ?></td>
 			<td><?php echo $t_anggota->jenis_kelamin ?></td>
-			<td><?php echo $t_anggota->password ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('t_anggota/read/'.$t_anggota->id_anggota),'Read'); 

@@ -31,6 +31,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active"><a href="<?php echo base_url('t_buku'); ?>">Buku <span class="sr-only">(current)</span></a></li>
+            <li><a href="<?php echo base_url('t_ebook'); ?>">E-Book</a></li>
             <li><a href="<?php echo base_url('t_anggota'); ?>">Anggota</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transaksi <span class="caret"></span></a>
@@ -41,9 +42,9 @@
               </ul>
             </li>
           </ul>
-          <form class="navbar-form navbar-left">
+          <form class="navbar-form navbar-left" action="<?php echo base_url()."t_anggota/index.html" ?>" method="get">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Nama Buku">
+              <input type="text" class="form-control" name="no_anggota" placeholder="No. Anggota">
             </div>
             <button type="submit" class="btn btn-default">Cari</button>
           </form>

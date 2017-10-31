@@ -8,7 +8,8 @@ class T_anggota_model extends CI_Model
 
     public $table = 't_anggota';
     public $id = 'id_anggota';
-    public $order = 'DESC';
+    public $order = 'ASC';
+    public $order_by = 'nama';
 
     function __construct()
     {
@@ -18,7 +19,7 @@ class T_anggota_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->order_by($this->id, $this->order);
+        $this->db->order_by($this->order_by, $this->order);
         return $this->db->get($this->table)->result();
     }
 
@@ -30,30 +31,72 @@ class T_anggota_model extends CI_Model
     }
     
     // get total rows
-    function total_rows($q = NULL) {
+    function total_rows($no_anggota = NULL, $nama = NULL, $kelas = NULL, $jurusan = NULL, $jenis_kelamin = NULL) {
+        /*
         $this->db->like('id_anggota', $q);
-	$this->db->or_like('no_anggota', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('kelas', $q);
-	$this->db->or_like('jurusan', $q);
-	$this->db->or_like('jenis_kelamin', $q);
-	$this->db->or_like('password', $q);
-	$this->db->from($this->table);
+    	$this->db->or_like('no_anggota', $q);
+    	$this->db->or_like('nama', $q);
+    	$this->db->or_like('kelas', $q);
+    	$this->db->or_like('jurusan', $q);
+    	$this->db->or_like('jenis_kelamin', $q);
+    	$this->db->or_like('password', $q);
+    	$this->db->from($this->table);
+        return $this->db->count_all_results();
+        */
+        if(trim($no_anggota)<>""){
+            $this->db->where("no_anggota", $no_anggota);  
+        }
+        if(trim($nama)<>""){
+            $where =  "(`nama` LIKE '%".$nama."%')";
+            $this->db->where($where);
+        }
+        if(trim($kelas)<>""){
+            $this->db->where("kelas", $kelas);  
+        }
+        if(trim($jurusan)<>""){
+            $this->db->where("jurusan", $jurusan);
+        }            
+        if(trim($jenis_kelamin)<>""){
+            $this->db->where("jenis_kelamin", $jenis_kelamin);
+        }            
+        
+        $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
-        $this->db->order_by($this->id, $this->order);
+    function get_limit_data($limit, $start = 0, $no_anggota = NULL, $nama = NULL, $kelas = NULL, $jurusan = NULL, $jenis_kelamin = NULL) {
+        /*$this->db->order_by($this->id, $this->order);
         $this->db->like('id_anggota', $q);
-	$this->db->or_like('no_anggota', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('kelas', $q);
-	$this->db->or_like('jurusan', $q);
-	$this->db->or_like('jenis_kelamin', $q);
-	$this->db->or_like('password', $q);
-	$this->db->limit($limit, $start);
+    	$this->db->or_like('no_anggota', $q);
+    	$this->db->or_like('nama', $q);
+    	$this->db->or_like('kelas', $q);
+    	$this->db->or_like('jurusan', $q);
+    	$this->db->or_like('jenis_kelamin', $q);
+    	$this->db->or_like('password', $q);
+    	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
+        */
+        $this->db->order_by($this->order_by, $this->order);
+        if(trim($no_anggota)<>""){
+            $this->db->where("no_anggota", $no_anggota);  
+        }
+        if(trim($nama)<>""){
+            $where =  "(`nama` LIKE '%".$nama."%')";
+            $this->db->where($where);
+        }
+        if(trim($kelas)<>""){
+            $this->db->where("kelas", $kelas);  
+        }
+        if(trim($jurusan)<>""){
+            $this->db->where("jurusan", $jurusan);
+        }            
+        if(trim($jenis_kelamin)<>""){
+            $this->db->where("jenis_kelamin", $jenis_kelamin);
+        }
+        $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();   
+
     }
 
     // insert data

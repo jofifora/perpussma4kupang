@@ -6,6 +6,5 @@
 	    <tr><td>Tahun</td><td><?php echo $tahun; ?></td></tr>
 	    <tr><td>Stok</td><td><?php echo $stok; ?></td></tr>
 	    <tr><td>Eksemplar</td><td><?php echo $eksemplar; ?></td></tr>
-	    <tr><td>Ebook</td><td><?php echo $ebook; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('t_buku') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo $link_kembali ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
