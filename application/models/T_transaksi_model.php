@@ -37,6 +37,12 @@ class T_transaksi_model extends CI_Model
         return $this->db->get('t_peminjaman')->row();
     }
 
+    function get_anggota_by_id($id)
+    {
+        $this->db->where('id_anggota', $id);
+        return $this->db->get('t_anggota')->row();
+    }
+
     function get_konstanta() {
         $this->db->order_by('tanggal_simpan', 'ASC');
         $this->db->limit(1);

@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_admin <?php echo $button ?></h2>
+        <h2 class="judulHalaman">Admin <?php echo $button ?></h2>
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
             <label for="varchar">User Name <?php echo form_error('user_name') ?></label>

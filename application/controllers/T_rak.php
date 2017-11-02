@@ -42,6 +42,7 @@ class T_rak extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
+            'status' => $this->session->userdata("status"),
         );
         $this->load->view('header');
         $this->load->view('t_rak/t_rak_list', $data);

@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_admin Read</h2>
+        <h2 class="judulHalaman">Admin Read</h2>
         <table class="table">
 	    <tr><td>User Name</td><td><?php echo $user_name; ?></td></tr>
 	    <tr><td>Password</td><td><?php echo $password; ?></td></tr>

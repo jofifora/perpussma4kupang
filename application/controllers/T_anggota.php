@@ -93,6 +93,7 @@ class T_anggota extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
+            'status' => $this->session->userdata("status"),
         );
         $this->session->set_userdata('anggota', $this->current_url());
         $this->load->view('header');

@@ -1,4 +1,28 @@
-        <h2 style="margin-top:0px">V_peminjaman_belum_dikembalikan List</h2>
+        <h2 class="judulHalaman">Data Peminjaman</h2>
+
+        <table class="table table-bordered" style="margin-bottom: 20px">
+            <tr>
+                <td>No. Anggota</td>
+                <td><?php echo $no_a; ?></td>
+            </tr>
+            <tr>
+                <td>Nama</td>
+                <td><?php echo $nm; ?></td>
+            </tr>
+            <tr>
+                <td>Kelas</td>
+                <td><?php echo $kl; ?></td>
+            </tr>
+            <tr>
+                <td>Jurusan</td>
+                <td><?php echo $jr; ?></td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td>
+                <td><?php echo $jk; ?></td>
+            </tr>
+        </table>
+
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php

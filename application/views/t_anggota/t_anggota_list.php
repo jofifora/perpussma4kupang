@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_anggota List</h2>
+        <h2 class="judulHalaman">Data Anggota</h2>
         <form action="<?php echo site_url('t_anggota/index'); ?>" class="form-inline" method="get">
             <div class="container">
                 <div class="row">
@@ -53,7 +53,7 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('t_anggota/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo (trim($status) == 'kepsek') ? '' : anchor(site_url('t_anggota/create'),'Create', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -87,13 +87,20 @@
 			<td><?php echo $t_anggota->jenis_kelamin ?></td>
 			<td style="text-align:center" width="140px">
 				<?php 
-				echo anchor(site_url('t_anggota/read/'.$t_anggota->id_anggota),'Read'); 
-				echo ' | '; 
-				echo anchor(site_url('t_anggota/update/'.$t_anggota->id_anggota),'Update'); 
-				echo ' <br> '; 
-				echo anchor(site_url('t_anggota/delete/'.$t_anggota->id_anggota),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
-                echo ' | '; 
-                echo anchor(site_url('t_transaksi?id='.$t_anggota->id_anggota),'Transaksi');
+                if (trim($status) == 'kepsek') {
+                    echo anchor(site_url('t_anggota/read/'.$t_anggota->id_anggota),'Read'); 
+                } else {
+                    echo anchor(site_url('t_anggota/read/'.$t_anggota->id_anggota),'Read'); 
+                    echo ' | '; 
+                    echo anchor(site_url('t_anggota/update/'.$t_anggota->id_anggota),'Update'); 
+                    echo ' <br> '; 
+                    echo anchor(site_url('t_anggota/delete/'.$t_anggota->id_anggota),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
+                    echo ' | '; 
+                    echo anchor(site_url('t_transaksi?id='.$t_anggota->id_anggota),'Transaksi');
+                }                
+
+
+				
 				?>
 			</td>
 		</tr>

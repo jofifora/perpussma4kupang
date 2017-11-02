@@ -18,11 +18,26 @@ class T_transaksi extends CI_Controller
 
     public function index()
     {
+        $no_a = '';
+        $nm = '';
+        $kl = '';
+        $jr = '';
+        $jk = '';
+
         $id = urldecode($this->input->get('id', TRUE));
         if (trim($id)=='') {
             $this->session->set_flashdata('message', 'Tidak ada anggota perpustakaan yang dipilih');
             redirect(site_url('t_anggota'));
         }
+
+        $anggota_row = $this->T_transaksi_model->get_anggota_by_id($id);        
+        if ($anggota_row) {
+            $no_a = $anggota_row->no_anggota;
+            $nm = $anggota_row->nama;
+            $kl = $anggota_row->kelas;
+            $jr = $anggota_row->jurusan;
+            $jk = $anggota_row->jenis_kelamin;
+        } 
 
     	$id = urldecode($this->input->get('id', TRUE));
     	$t_transaksi = $this->T_transaksi_model->get_all($id);
@@ -41,6 +56,11 @@ class T_transaksi extends CI_Controller
         $data = array(
         	'id' => $id,
             't_transaksi_data' => $t_transaksi,
+            'no_a' => $no_a,
+            'nm' => $nm,
+            'kl' => $kl,
+            'jr' => $jr,
+            'jk' => $jk,
             'total_rows' => $this->T_transaksi_model->total_rows($id),
             'max_lama_pinjam' => $max_lama_pinjam,
             'denda_per_hari' => $denda_per_hari,

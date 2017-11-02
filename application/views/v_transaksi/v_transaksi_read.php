@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">V_transaksi Read</h2>
+        <h2 class="judulHalaman">Transaksi Read</h2>
         <table class="table">
 	    <tr><td>Id Peminjaman</td><td><?php echo $id_peminjaman; ?></td></tr>
 	    <tr><td>Id Buku</td><td><?php echo $id_buku; ?></td></tr>

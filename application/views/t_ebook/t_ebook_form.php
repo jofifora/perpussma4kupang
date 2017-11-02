@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_ebook <?php echo $button ?></h2>
+        <h2 class="judulHalaman">E-Book <?php echo $button ?></h2>
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
             <label for="varchar">Nama Ebook <?php echo form_error('nama_ebook') ?></label>

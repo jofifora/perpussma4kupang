@@ -42,6 +42,7 @@ class T_kategori extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
+            'status' => $this->session->userdata("status"),
         );
         $this->load->view('header');
         $this->load->view('t_kategori/t_kategori_list', $data);

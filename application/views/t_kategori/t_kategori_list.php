@@ -1,7 +1,8 @@
-        <h2 style="margin-top:0px">T_kategori List</h2>
+        <h2 class="judulHalaman">Data Kategori</h2>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('t_kategori/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php //echo anchor(site_url('t_kategori/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo (trim($status) == 'kepsek') ? '' : anchor(site_url('t_kategori/create'),'Create', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -45,11 +46,19 @@
 			<td><?php echo $t_kategori->deskripsi_kategori ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('t_kategori/read/'.$t_kategori->id_kategori),'Read'); 
-				echo ' | '; 
-				echo anchor(site_url('t_kategori/update/'.$t_kategori->id_kategori),'Update'); 
-				echo ' | '; 
-				echo anchor(site_url('t_kategori/delete/'.$t_kategori->id_kategori),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+
+                if (trim($status) == 'kepsek') {
+                    echo anchor(site_url('t_kategori/read/'.$t_kategori->id_kategori),'Read'); 
+                } else {
+                    echo anchor(site_url('t_kategori/read/'.$t_kategori->id_kategori),'Read'); 
+                    echo ' | '; 
+                    echo anchor(site_url('t_kategori/update/'.$t_kategori->id_kategori),'Update'); 
+                    echo ' | '; 
+                    echo anchor(site_url('t_kategori/delete/'.$t_kategori->id_kategori),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
+                }
+
+
+				 
 				?>
 			</td>
 		</tr>

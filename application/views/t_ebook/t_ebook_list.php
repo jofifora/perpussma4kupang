@@ -1,7 +1,7 @@
-        <h2 style="margin-top:0px">T_ebook List</h2>
+        <h2 class="judulHalaman">Data E-Book</h2>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('t_ebook/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo (trim($status) == 'kepsek') ? '' : anchor(site_url('t_ebook/create'),'Create', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -43,21 +43,25 @@
 			<td><?php echo $t_ebook->nama_ebook ?></td>
 			<td style="text-align:center" width="200px">
 
-                <?php echo form_open_multipart('t_ebook/do_upload/'.$t_ebook->id_ebook); ?>
+                <?php 
 
-                <input type="file" name="<?php echo 'form_upload'.$t_ebook->id_ebook; ?>" size="20" />
+                if (trim($status) == 'kepsek') {
+                    echo trim($t_ebook->tempat_ebook) == '' ? 'Belum Upload' : anchor(site_url('t_ebook/read/'.$t_ebook->id_ebook),'Read',array('target' => '_blank', 'class' => 'new_window'));
+                } else {
+                    echo form_open_multipart('t_ebook/do_upload/'.$t_ebook->id_ebook);
+                    echo '<input type="file" name="form_upload'.$t_ebook->id_ebook.'" size="20" />';
+                    echo '<input type="submit" value="upload" />';
+                    echo '</form>';
 
-                <input type="submit" value="upload" />
+                    echo trim($t_ebook->tempat_ebook) == '' ? 'Belum Upload' : anchor(site_url('t_ebook/read/'.$t_ebook->id_ebook),'Read',array('target' => '_blank', 'class' => 'new_window'));            
+                    echo ' | '; 
+                    echo anchor(site_url('t_ebook/update/'.$t_ebook->id_ebook),'Update'); 
+                    echo ' | '; 
+                    echo anchor(site_url('t_ebook/delete/'.$t_ebook->id_ebook),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                    
+                }
+                ?>
 
-                </form>
-
-				<?php 
-                echo trim($t_ebook->tempat_ebook) == '' ? 'Belum Upload' : anchor(site_url('t_ebook/read/'.$t_ebook->id_ebook),'Read',array('target' => '_blank', 'class' => 'new_window'));			
-				echo ' | '; 
-				echo anchor(site_url('t_ebook/update/'.$t_ebook->id_ebook),'Update'); 
-				echo ' | '; 
-				echo anchor(site_url('t_ebook/delete/'.$t_ebook->id_ebook),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-				?>
 			</td>
 		</tr>
                 <?php

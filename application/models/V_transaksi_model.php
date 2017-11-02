@@ -9,6 +9,7 @@ class V_transaksi_model extends CI_Model
     public $table = 'v_transaksi';
     public $id = 'id_peminjaman';
     public $order = 'DESC';
+    public $order_by = 'id_peminjaman';
 
     function __construct()
     {
@@ -30,63 +31,137 @@ class V_transaksi_model extends CI_Model
     }
     
     // get total rows
-    function total_rows($q = NULL) {
-        //$this->db->like('', $q);
-	$this->db->or_like('id_peminjaman', $q);
-	$this->db->or_like('id_buku', $q);
-	$this->db->or_like('judul_buku', $q);
-	$this->db->or_like('id_kategori', $q);
-	$this->db->or_like('nama_kategori', $q);
-	$this->db->or_like('deskripsi_kategori', $q);
-	$this->db->or_like('id_rak', $q);
-	$this->db->or_like('nama_rak', $q);
-	$this->db->or_like('deskripsi_rak', $q);
-	$this->db->or_like('tahun', $q);
-	$this->db->or_like('stok', $q);
-	$this->db->or_like('eksemplar', $q);
-	$this->db->or_like('id_anggota', $q);
-	$this->db->or_like('no_anggota', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('kelas', $q);
-	$this->db->or_like('jurusan', $q);
-	$this->db->or_like('jenis_kelamin', $q);
-	$this->db->or_like('tanggal_pinjam', $q);
-	$this->db->or_like('id_pengembalian', $q);
-	$this->db->or_like('tanggal_pengembalian', $q);
-	$this->db->or_like('denda', $q);
-	$this->db->from($this->table);
+    function total_rows($no_anggota = NULL, $nama = NULL, $kelas = NULL, $jurusan = NULL, $jenis_kelamin = NULL, $judul_buku = NULL, $id_kategori = NULL, $id_rak = NULL, $tahun = NULL, $tgl_pj1 = NULL, $tgl_pj2 = NULL, $tgl_pb1 = NULL, $tgl_pb2 = NULL, $st_pb = NULL) {
+
+        if(trim($no_anggota)<>""){
+            $this->db->where("no_anggota", $no_anggota);  
+        }
+        if(trim($nama)<>""){
+            $where =  "(`nama` LIKE '%".$nama."%')";
+            $this->db->where($where);
+        }
+        if(trim($kelas)<>""){
+            $this->db->where("kelas", $kelas);  
+        }
+        if(trim($jurusan)<>""){
+            $this->db->where("jurusan", $jurusan);
+        }            
+        if(trim($jenis_kelamin)<>""){
+            $this->db->where("jenis_kelamin", $jenis_kelamin);
+        }
+
+        if(trim($judul_buku)<>""){
+            $where =  "(`judul_buku` LIKE '%".$judul_buku."%')";
+            $this->db->where($where);
+        }
+        if(trim($id_kategori)<>""){
+            $this->db->where("id_kategori", $id_kategori);  
+        }
+        if(trim($id_rak)<>""){
+            $this->db->where("id_rak", $id_rak);  
+        }
+        if(trim($tahun)<>""){
+            $this->db->where("tahun", $tahun);
+        }
+
+        if((trim($tgl_pj1)<>"") and (trim($tgl_pj2)<>"")){
+            $this->db->where("tanggal_pinjam BETWEEN '".$tgl_pj1."' AND '".$tgl_pj2."'");
+        } elseif (trim($tgl_pj1)<>"") {
+            $this->db->where("tanggal_pinjam", $tgl_pj1);  
+        }
+
+        if((trim($tgl_pb1)<>"") and (trim($tgl_pb2)<>"")){
+            $this->db->where("tanggal_pengembalian BETWEEN '".$tgl_pb1."' AND '".$tgl_pb2."'");
+        } elseif (trim($tgl_pb1)<>"") {
+            $this->db->where("tanggal_pengembalian", $tgl_pb1);  
+        }
+          
+        if(trim($st_pb)<>""){
+            if (trim($st_pb)=='2') {
+                $this->db->where("id_pengembalian IS NULL");
+            } else {
+                $this->db->where("id_pengembalian IS NOT NULL");
+            }     
+        }
+        
+        $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
-        $this->db->order_by($this->id, $this->order);
-        //$this->db->like('', $q);
-	$this->db->or_like('id_peminjaman', $q);
-	$this->db->or_like('id_buku', $q);
-	$this->db->or_like('judul_buku', $q);
-	$this->db->or_like('id_kategori', $q);
-	$this->db->or_like('nama_kategori', $q);
-	$this->db->or_like('deskripsi_kategori', $q);
-	$this->db->or_like('id_rak', $q);
-	$this->db->or_like('nama_rak', $q);
-	$this->db->or_like('deskripsi_rak', $q);
-	$this->db->or_like('tahun', $q);
-	$this->db->or_like('stok', $q);
-	$this->db->or_like('eksemplar', $q);
-	$this->db->or_like('id_anggota', $q);
-	$this->db->or_like('no_anggota', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('kelas', $q);
-	$this->db->or_like('jurusan', $q);
-	$this->db->or_like('jenis_kelamin', $q);
-	$this->db->or_like('tanggal_pinjam', $q);
-	$this->db->or_like('id_pengembalian', $q);
-	$this->db->or_like('tanggal_pengembalian', $q);
-	$this->db->or_like('denda', $q);
-	$this->db->limit($limit, $start);
+    function get_limit_data($limit, $start = 0, $no_anggota = NULL, $nama = NULL, $kelas = NULL, $jurusan = NULL, $jenis_kelamin = NULL, $judul_buku = NULL, $id_kategori = NULL, $id_rak = NULL, $tahun = NULL, $tgl_pj1 = NULL, $tgl_pj2 = NULL, $tgl_pb1 = NULL, $tgl_pb2 = NULL, $st_pb = NULL) 
+    {
+
+        $this->db->order_by($this->order_by, $this->order);
+        if(trim($no_anggota)<>""){
+            $this->db->where("no_anggota", $no_anggota);  
+        }
+        if(trim($nama)<>""){
+            $where =  "(`nama` LIKE '%".$nama."%')";
+            $this->db->where($where);
+        }
+        if(trim($kelas)<>""){
+            $this->db->where("kelas", $kelas);  
+        }
+        if(trim($jurusan)<>""){
+            $this->db->where("jurusan", $jurusan);
+        }            
+        if(trim($jenis_kelamin)<>""){
+            $this->db->where("jenis_kelamin", $jenis_kelamin);
+        }
+
+        if(trim($judul_buku)<>""){
+            $where =  "(`judul_buku` LIKE '%".$judul_buku."%')";
+            $this->db->where($where);
+        }
+        if(trim($id_kategori)<>""){
+            $this->db->where("id_kategori", $id_kategori);  
+        }
+        if(trim($id_rak)<>""){
+            $this->db->where("id_rak", $id_rak);  
+        }
+        if(trim($tahun)<>""){
+            $this->db->where("tahun", $tahun);
+        }  
+
+        if((trim($tgl_pj1)<>"") and (trim($tgl_pj2)<>"")){
+            $this->db->where("tanggal_pinjam BETWEEN '".$tgl_pj1."' AND '".$tgl_pj2."'");
+        } elseif (trim($tgl_pj1)<>"") {
+            $this->db->where("tanggal_pinjam", $tgl_pj1);  
+        }
+
+        if((trim($tgl_pb1)<>"") and (trim($tgl_pb2)<>"")){
+            $this->db->where("tanggal_pengembalian BETWEEN '".$tgl_pb1."' AND '".$tgl_pb2."'");
+        } elseif (trim($tgl_pb1)<>"") {
+            $this->db->where("tanggal_pengembalian", $tgl_pb1);  
+        }
+          
+        if(trim($st_pb)<>""){
+            if (trim($st_pb)=='2') {
+                $this->db->where("id_pengembalian IS NULL");
+            } else {
+                $this->db->where("id_pengembalian IS NOT NULL");
+            }     
+        }
+
+
+        $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
+
+    function get_all_kategori()
+    {
+        $this->db->order_by('nama_kategori');
+        return $this->db->get('t_kategori')->result();
+    }
+
+    function get_all_rak()
+    {
+        $this->db->order_by('nama_rak');
+        return $this->db->get('t_rak')->result();
+    }
+
+    /*
 
     // insert data
     function insert($data)
@@ -107,6 +182,7 @@ class V_transaksi_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
+    */
 
 }
 

@@ -1,5 +1,5 @@
 
-        <h2 style="margin-top:0px">T_anggota <?php echo $button ?></h2>
+        <h2 class="judulHalaman"">Anggota <?php echo $button ?></h2>
         <form action="<?php echo $action; ?>" method="post" class="form-input">
 	    <div class="form-group">
             <label for="varchar">No Anggota <?php echo form_error('no_anggota') ?></label>

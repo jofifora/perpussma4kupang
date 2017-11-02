@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_buku List</h2>
+        <h2 style="margin-top:0px">Pilih buku</h2>
 
         <form action="<?php echo site_url('t_pilih_buku/index'); ?>" class="form-inline" method="get">
             <div class="container text-center">

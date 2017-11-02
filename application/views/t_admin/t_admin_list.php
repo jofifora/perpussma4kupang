@@ -1,4 +1,4 @@
-        <h2 style="margin-top:20px">T_admin List</h2>
+        <h2 class="judulHalaman">Data Admin</h2>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('t_admin/create'),'Create', 'class="btn btn-primary"'); ?>

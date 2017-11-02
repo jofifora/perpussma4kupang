@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_rak Read</h2>
+        <h2 class="judulHalaman">Rak Read</h2>
         <table class="table">
 	    <tr><td>Nama Rak</td><td><?php echo $nama_rak; ?></td></tr>
 	    <tr><td>Deskripsi Rak</td><td><?php echo $deskripsi_rak; ?></td></tr>

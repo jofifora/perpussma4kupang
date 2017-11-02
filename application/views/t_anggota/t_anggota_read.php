@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_anggota Read</h2>
+        <h2 class="judulHalaman">Anggota Read</h2>
         <table class="table">
 	    <tr><td>No Anggota</td><td><?php echo $no_anggota; ?></td></tr>
 	    <tr><td>Nama</td><td><?php echo $nama; ?></td></tr>

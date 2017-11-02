@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_buku Read</h2>
+        <h2 class="judulHalaman">Buku Read</h2>
         <table class="table">
 	    <tr><td>Judul Buku</td><td><?php echo $judul_buku; ?></td></tr>
 	    <tr><td>Id Kategori</td><td><?php echo $id_kategori; ?></td></tr>

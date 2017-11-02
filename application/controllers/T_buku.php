@@ -96,6 +96,7 @@ class T_buku extends CI_Controller
             'start' => $start,
             'data_kategori' => $this->T_buku_model->get_all_kategori(),
             'data_rak' => $this->T_buku_model->get_all_rak(),
+            'status' => $this->session->userdata("status"),
         );
         $this->session->set_userdata('buku', $this->current_url());
         $this->load->view('header');

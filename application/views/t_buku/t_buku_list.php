@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_buku List</h2>
+        <h2 class="judulHalaman">Data Buku</h2>
 
         <form action="<?php echo site_url('t_buku/index'); ?>" class="form-inline" method="get">
             <div class="container text-center">
@@ -50,7 +50,7 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('t_buku/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo (trim($status) == 'kepsek') ? '' : anchor(site_url('t_buku/create'),'Create', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -86,11 +86,15 @@
             <td><?php echo $t_buku->eksemplar ?></td>
             <td style="text-align:center" width="200px">
                 <?php 
-                echo anchor(site_url('t_buku/read/'.$t_buku->id_buku),'Read'); 
-                echo ' | '; 
-                echo anchor(site_url('t_buku/update/'.$t_buku->id_buku),'Update'); 
-                echo ' | '; 
-                echo anchor(site_url('t_buku/delete/'.$t_buku->id_buku),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                if (trim($status) == 'kepsek') {
+                    echo anchor(site_url('t_buku/read/'.$t_buku->id_buku),'Read'); 
+                } else {
+                    echo anchor(site_url('t_buku/read/'.$t_buku->id_buku),'Read'); 
+                    echo ' | '; 
+                    echo anchor(site_url('t_buku/update/'.$t_buku->id_buku),'Update'); 
+                    echo ' | '; 
+                    echo anchor(site_url('t_buku/delete/'.$t_buku->id_buku),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                }                
                 ?>
             </td>
         </tr>

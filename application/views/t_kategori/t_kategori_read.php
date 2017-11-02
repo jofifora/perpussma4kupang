@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">T_kategori Read</h2>
+        <h2 class="judulHalaman">Kategori Read</h2>
         <table class="table">
 	    <tr><td>Nama Kategori</td><td><?php echo $nama_kategori; ?></td></tr>
 	    <tr><td>Deskripsi Kategori</td><td><?php echo $deskripsi_kategori; ?></td></tr>

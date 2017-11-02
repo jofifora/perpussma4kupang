@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/cssBeta.css') ?>"/>
+    <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap-datepicker.min.css') ?>"/>
 
   </head>
 
@@ -33,14 +34,7 @@
             <li><a href="<?php echo base_url('t_buku'); ?>">Buku <span class="sr-only">(current)</span></a></li>
             <li><a href="<?php echo base_url('t_ebook'); ?>">E-Book</a></li>
             <li><a href="<?php echo base_url('t_anggota'); ?>">Anggota</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transaksi <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="<?php echo base_url('t_peminjaman'); ?>">Peminjaman</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="<?php echo base_url('t_pengembalian'); ?>">Pengembalian</a></li>
-              </ul>
-            </li>
+            <li><a href="<?php echo base_url('v_transaksi'); ?>">Data Transaksi</a></li>
           </ul>
           <form class="navbar-form navbar-left" action="<?php echo base_url()."t_anggota/index.html" ?>" method="get">
             <div class="form-group">
@@ -51,14 +45,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="<?php echo base_url('t_rak'); ?>">Rak</a></li>
             <li><a href="<?php echo base_url('t_kategori'); ?>">Kategori</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="<?php echo base_url('t_admin'); ?>">Data Admin</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="<?php echo base_url('auth/logout'); ?>">Keluar</a></li>
-              </ul>
-            </li>
+            <li><a href="<?php echo base_url('auth/logout'); ?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Keluar</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

@@ -1,7 +1,8 @@
-        <h2 style="margin-top:0px">T_rak List</h2>
+        <h2 class="judulHalaman">Data Rak</h2>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('t_rak/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo (trim($status) == 'kepsek') ? '' : anchor(site_url('t_rak/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php //echo anchor(site_url('t_rak/create'),'Create', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -45,11 +46,18 @@
 			<td><?php echo $t_rak->deskripsi_rak ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('t_rak/read/'.$t_rak->id_rak),'Read'); 
-				echo ' | '; 
-				echo anchor(site_url('t_rak/update/'.$t_rak->id_rak),'Update'); 
-				echo ' | '; 
-				echo anchor(site_url('t_rak/delete/'.$t_rak->id_rak),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+
+                if (trim($status) == 'kepsek') {
+                    echo anchor(site_url('t_rak/read/'.$t_rak->id_rak),'Read');
+                } else {
+                    echo anchor(site_url('t_rak/read/'.$t_rak->id_rak),'Read'); 
+                    echo ' | '; 
+                    echo anchor(site_url('t_rak/update/'.$t_rak->id_rak),'Update'); 
+                    echo ' | '; 
+                    echo anchor(site_url('t_rak/delete/'.$t_rak->id_rak),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                }
+
+				
 				?>
 			</td>
 		</tr>

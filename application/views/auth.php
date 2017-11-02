@@ -52,8 +52,7 @@
               <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
             </div>
           </form>
-          <?php if ($this->session->flashdata('error') == "Username is invalid") echo "<div class='alert alert-warning'>Anda Salah Mengisi Username</div>"; ?>
-          <?php if ($this->session->flashdata('error') == "Password is invalid") echo "<div class='alert alert-warning'>Anda Salah Mengisi Password</div>"; ?>
+          <?php echo $this->session->userdata('error') <> '' ? "<div class='alert alert-warning'>".$this->session->userdata('error')."!!!</div>" : ''; ?>
         </div>
       </div>
     </div>
