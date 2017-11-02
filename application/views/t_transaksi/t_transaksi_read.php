@@ -1,4 +1,4 @@
-        <h2 style="margin-top:0px">V_transaksi Read</h2>
+        <h2 style="margin-top:0px">V_peminjaman_belum_dikembalikan Read</h2>
         <table class="table">
 	    <tr><td>Id Peminjaman</td><td><?php echo $id_peminjaman; ?></td></tr>
 	    <tr><td>Id Buku</td><td><?php echo $id_buku; ?></td></tr>
@@ -19,8 +19,5 @@
 	    <tr><td>Jurusan</td><td><?php echo $jurusan; ?></td></tr>
 	    <tr><td>Jenis Kelamin</td><td><?php echo $jenis_kelamin; ?></td></tr>
 	    <tr><td>Tanggal Pinjam</td><td><?php echo $tanggal_pinjam; ?></td></tr>
-	    <tr><td>Id Pengembalian</td><td><?php echo $id_pengembalian; ?></td></tr>
-	    <tr><td>Tanggal Pengembalian</td><td><?php echo $tanggal_pengembalian; ?></td></tr>
-	    <tr><td>Denda</td><td><?php echo $denda; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('v_transaksi') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('v_peminjaman_belum_dikembalikan') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>

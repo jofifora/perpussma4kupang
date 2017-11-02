@@ -85,13 +85,15 @@
 			<td><?php echo $t_anggota->kelas ?></td>
 			<td><?php echo $t_anggota->jurusan ?></td>
 			<td><?php echo $t_anggota->jenis_kelamin ?></td>
-			<td style="text-align:center" width="200px">
+			<td style="text-align:center" width="140px">
 				<?php 
 				echo anchor(site_url('t_anggota/read/'.$t_anggota->id_anggota),'Read'); 
 				echo ' | '; 
 				echo anchor(site_url('t_anggota/update/'.$t_anggota->id_anggota),'Update'); 
-				echo ' | '; 
-				echo anchor(site_url('t_anggota/delete/'.$t_anggota->id_anggota),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo ' <br> '; 
+				echo anchor(site_url('t_anggota/delete/'.$t_anggota->id_anggota),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
+                echo ' | '; 
+                echo anchor(site_url('t_transaksi?id='.$t_anggota->id_anggota),'Transaksi');
 				?>
 			</td>
 		</tr>

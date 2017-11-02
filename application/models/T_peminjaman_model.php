@@ -7,6 +7,7 @@ class T_peminjaman_model extends CI_Model
 {
 
     public $table = 't_peminjaman';
+    public $view = 'v_peminjaman_semua';
     public $id = 'id_peminjaman';
     public $order = 'DESC';
 
@@ -19,23 +20,23 @@ class T_peminjaman_model extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        return $this->db->get($this->view)->result();
     }
 
     // get data by id
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        return $this->db->get($this->view)->row();
     }
     
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id_peminjaman', $q);
-	$this->db->or_like('id_buku', $q);
-	$this->db->or_like('id_anggota', $q);
-	$this->db->or_like('tanggal_pinjam', $q);
-	$this->db->from($this->table);
+    	$this->db->or_like('id_buku', $q);
+    	$this->db->or_like('id_anggota', $q);
+    	$this->db->or_like('tanggal_pinjam', $q);
+    	$this->db->from($this->view);
         return $this->db->count_all_results();
     }
 
@@ -43,11 +44,11 @@ class T_peminjaman_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_peminjaman', $q);
-	$this->db->or_like('id_buku', $q);
-	$this->db->or_like('id_anggota', $q);
-	$this->db->or_like('tanggal_pinjam', $q);
-	$this->db->limit($limit, $start);
-        return $this->db->get($this->table)->result();
+    	$this->db->or_like('id_buku', $q);
+    	$this->db->or_like('id_anggota', $q);
+    	$this->db->or_like('tanggal_pinjam', $q);
+    	$this->db->limit($limit, $start);
+        return $this->db->get($this->view)->result();
     }
 
     // insert data

@@ -7,7 +7,7 @@ class V_buku_model extends CI_Model
 {
 
     public $table = 'v_buku';
-    public $id = '';
+    public $id = 'id_buku';
     public $order = 'DESC';
 
     function __construct()
@@ -31,38 +31,38 @@ class V_buku_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('', $q);
-	$this->db->or_like('id_buku', $q);
-	$this->db->or_like('judul_buku', $q);
-	$this->db->or_like('id_kategori', $q);
-	$this->db->or_like('nama_kategori', $q);
-	$this->db->or_like('deskripsi_kategori', $q);
-	$this->db->or_like('id_rak', $q);
-	$this->db->or_like('nama_rak', $q);
-	$this->db->or_like('deskripsi_rak', $q);
-	$this->db->or_like('tahun', $q);
-	$this->db->or_like('stok', $q);
-	$this->db->or_like('eksemplar', $q);
-	$this->db->from($this->table);
+        //$this->db->like('', $q);
+    	$this->db->or_like('id_buku', $q);
+    	$this->db->or_like('judul_buku', $q);
+    	$this->db->or_like('id_kategori', $q);
+    	$this->db->or_like('nama_kategori', $q);
+    	$this->db->or_like('deskripsi_kategori', $q);
+    	$this->db->or_like('id_rak', $q);
+    	$this->db->or_like('nama_rak', $q);
+    	$this->db->or_like('deskripsi_rak', $q);
+    	$this->db->or_like('tahun', $q);
+    	$this->db->or_like('stok', $q);
+    	$this->db->or_like('eksemplar', $q);
+    	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('', $q);
-	$this->db->or_like('id_buku', $q);
-	$this->db->or_like('judul_buku', $q);
-	$this->db->or_like('id_kategori', $q);
-	$this->db->or_like('nama_kategori', $q);
-	$this->db->or_like('deskripsi_kategori', $q);
-	$this->db->or_like('id_rak', $q);
-	$this->db->or_like('nama_rak', $q);
-	$this->db->or_like('deskripsi_rak', $q);
-	$this->db->or_like('tahun', $q);
-	$this->db->or_like('stok', $q);
-	$this->db->or_like('eksemplar', $q);
-	$this->db->limit($limit, $start);
+        //$this->db->like('', $q);
+    	$this->db->or_like('id_buku', $q);
+    	$this->db->or_like('judul_buku', $q);
+    	$this->db->or_like('id_kategori', $q);
+    	$this->db->or_like('nama_kategori', $q);
+    	$this->db->or_like('deskripsi_kategori', $q);
+    	$this->db->or_like('id_rak', $q);
+    	$this->db->or_like('nama_rak', $q);
+    	$this->db->or_like('deskripsi_rak', $q);
+    	$this->db->or_like('tahun', $q);
+    	$this->db->or_like('stok', $q);
+    	$this->db->or_like('eksemplar', $q);
+    	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
 

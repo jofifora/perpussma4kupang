@@ -90,9 +90,9 @@ class T_pengembalian extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'id_peminjaman' => $this->input->post('id_peminjaman',TRUE),
-		'tanggal_pengembalian' => $this->input->post('tanggal_pengembalian',TRUE),
-		'denda' => $this->input->post('denda',TRUE),
+        		'id_peminjaman' => $this->input->post('id_peminjaman',TRUE),
+        		'tanggal_pengembalian' => $this->input->post('tanggal_pengembalian',TRUE),
+        		'denda' => $this->input->post('denda',TRUE),
 	    );
 
             $this->T_pengembalian_model->insert($data);

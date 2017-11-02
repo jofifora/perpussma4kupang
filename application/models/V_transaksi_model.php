@@ -7,7 +7,7 @@ class V_transaksi_model extends CI_Model
 {
 
     public $table = 'v_transaksi';
-    public $id = '';
+    public $id = 'id_peminjaman';
     public $order = 'DESC';
 
     function __construct()
@@ -31,7 +31,7 @@ class V_transaksi_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('', $q);
+        //$this->db->like('', $q);
 	$this->db->or_like('id_peminjaman', $q);
 	$this->db->or_like('id_buku', $q);
 	$this->db->or_like('judul_buku', $q);
@@ -61,7 +61,7 @@ class V_transaksi_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('', $q);
+        //$this->db->like('', $q);
 	$this->db->or_like('id_peminjaman', $q);
 	$this->db->or_like('id_buku', $q);
 	$this->db->or_like('judul_buku', $q);

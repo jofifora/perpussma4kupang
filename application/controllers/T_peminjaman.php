@@ -72,10 +72,10 @@ class T_peminjaman extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('t_peminjaman/create_action'),
-	    'id_peminjaman' => set_value('id_peminjaman'),
-	    'id_buku' => set_value('id_buku'),
-	    'id_anggota' => set_value('id_anggota'),
-	    'tanggal_pinjam' => set_value('tanggal_pinjam'),
+    	    'id_peminjaman' => set_value('id_peminjaman'),
+    	    'id_buku' => set_value('id_buku'),
+    	    'id_anggota' => set_value('id_anggota'),
+    	    'tanggal_pinjam' => set_value('tanggal_pinjam'),
 	);
         $this->load->view('header');
         $this->load->view('t_peminjaman/t_peminjaman_form', $data);
@@ -90,9 +90,9 @@ class T_peminjaman extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'id_buku' => $this->input->post('id_buku',TRUE),
-		'id_anggota' => $this->input->post('id_anggota',TRUE),
-		'tanggal_pinjam' => $this->input->post('tanggal_pinjam',TRUE),
+        		'id_buku' => $this->input->post('id_buku',TRUE),
+        		'id_anggota' => $this->input->post('id_anggota',TRUE),
+        		'tanggal_pinjam' => $this->input->post('tanggal_pinjam',TRUE),
 	    );
 
             $this->T_peminjaman_model->insert($data);

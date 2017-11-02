@@ -8,6 +8,9 @@ class V_transaksi extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata("logged_in")) {
+            redirect("Auth");
+        }
         $this->load->model('V_transaksi_model');
         $this->load->library('form_validation');
     }
@@ -40,7 +43,9 @@ class V_transaksi extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
+        $this->load->view('header');
         $this->load->view('v_transaksi/v_transaksi_list', $data);
+        $this->load->view('footer');
     }
 
     public function read($id) 
@@ -71,7 +76,9 @@ class V_transaksi extends CI_Controller
 		'tanggal_pengembalian' => $row->tanggal_pengembalian,
 		'denda' => $row->denda,
 	    );
+            $this->load->view('header');
             $this->load->view('v_transaksi/v_transaksi_read', $data);
+            $this->load->view('footer');
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('v_transaksi'));

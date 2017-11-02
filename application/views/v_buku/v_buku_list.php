@@ -75,11 +75,11 @@
 			<td><?php echo $v_buku->eksemplar ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('v_buku/read/'.$v_buku->),'Read'); 
+				echo anchor(site_url('v_buku/read/'.$v_buku->id_buku),'Read'); 
 				echo ' | '; 
-				echo anchor(site_url('v_buku/update/'.$v_buku->),'Update'); 
+				echo anchor(site_url('v_buku/update/'.$v_buku->id_buku),'Update'); 
 				echo ' | '; 
-				echo anchor(site_url('v_buku/delete/'.$v_buku->),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('v_buku/delete/'.$v_buku->id_buku),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
 		</tr>
