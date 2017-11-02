@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2017 at 06:05 PM
+-- Generation Time: Nov 02, 2017 at 06:33 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -33,14 +33,6 @@ CREATE TABLE `t_admin` (
   `status` enum('admin','kepsek') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `t_admin`
---
-
-INSERT INTO `t_admin` (`id_admin`, `user_name`, `password`, `status`) VALUES
-(1, 'admin', 'admin', 'admin'),
-(2, 'kepsek', 'kepsek', 'kepsek');
-
 -- --------------------------------------------------------
 
 --
@@ -53,7 +45,7 @@ CREATE TABLE `t_anggota` (
   `nama` varchar(50) DEFAULT NULL,
   `kelas` varchar(5) NOT NULL,
   `jurusan` varchar(12) NOT NULL,
-  `jenis_kelamin` varchar(10) NOT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
   `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -70,8 +62,19 @@ CREATE TABLE `t_buku` (
   `id_rak` int(11) NOT NULL,
   `tahun` year(4) NOT NULL,
   `stok` int(11) NOT NULL,
-  `eksemplar` int(11) NOT NULL,
-  `ebook` varchar(255) NOT NULL
+  `eksemplar` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_ebook`
+--
+
+CREATE TABLE `t_ebook` (
+  `id_ebook` int(11) NOT NULL,
+  `nama_ebook` varchar(255) NOT NULL,
+  `tempat_ebook` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -96,15 +99,9 @@ CREATE TABLE `t_konstanta` (
   `id_konstanta` int(11) NOT NULL,
   `denda_per_hari` int(11) NOT NULL,
   `max_lama_pinjam` int(11) NOT NULL,
+  `max_buku_pinjam` int(11) NOT NULL,
   `tanggal_simpan` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `t_konstanta`
---
-
-INSERT INTO `t_konstanta` (`id_konstanta`, `denda_per_hari`, `max_lama_pinjam`, `tanggal_simpan`) VALUES
-(1, 50, 14, '2017-10-25 07:19:13');
 
 -- --------------------------------------------------------
 
@@ -144,6 +141,184 @@ CREATE TABLE `t_rak` (
   `deskripsi_rak` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_buku`
+--
+CREATE TABLE `v_buku` (
+`id_buku` int(11)
+,`judul_buku` varchar(50)
+,`id_kategori` int(11)
+,`nama_kategori` varchar(50)
+,`deskripsi_kategori` text
+,`id_rak` int(11)
+,`nama_rak` varchar(20)
+,`deskripsi_rak` text
+,`tahun` year(4)
+,`stok` int(11)
+,`eksemplar` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_peminjaman_belum_dikembalikan`
+--
+CREATE TABLE `v_peminjaman_belum_dikembalikan` (
+`id_peminjaman` int(11)
+,`id_buku` int(11)
+,`judul_buku` varchar(50)
+,`id_kategori` int(11)
+,`nama_kategori` varchar(50)
+,`deskripsi_kategori` text
+,`id_rak` int(11)
+,`nama_rak` varchar(20)
+,`deskripsi_rak` text
+,`tahun` year(4)
+,`stok` int(11)
+,`eksemplar` int(11)
+,`id_anggota` int(11)
+,`no_anggota` varchar(10)
+,`nama` varchar(50)
+,`kelas` varchar(5)
+,`jurusan` varchar(12)
+,`jenis_kelamin` enum('Laki-laki','Perempuan')
+,`tanggal_pinjam` date
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_peminjaman_semua`
+--
+CREATE TABLE `v_peminjaman_semua` (
+`id_peminjaman` int(11)
+,`id_buku` int(11)
+,`judul_buku` varchar(50)
+,`id_kategori` int(11)
+,`nama_kategori` varchar(50)
+,`deskripsi_kategori` text
+,`id_rak` int(11)
+,`nama_rak` varchar(20)
+,`deskripsi_rak` text
+,`tahun` year(4)
+,`stok` int(11)
+,`eksemplar` int(11)
+,`id_anggota` int(11)
+,`no_anggota` varchar(10)
+,`nama` varchar(50)
+,`kelas` varchar(5)
+,`jurusan` varchar(12)
+,`jenis_kelamin` enum('Laki-laki','Perempuan')
+,`tanggal_pinjam` date
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_peminjaman_sudah_dikembalikan`
+--
+CREATE TABLE `v_peminjaman_sudah_dikembalikan` (
+`id_peminjaman` int(11)
+,`id_buku` int(11)
+,`judul_buku` varchar(50)
+,`id_kategori` int(11)
+,`nama_kategori` varchar(50)
+,`deskripsi_kategori` text
+,`id_rak` int(11)
+,`nama_rak` varchar(20)
+,`deskripsi_rak` text
+,`tahun` year(4)
+,`stok` int(11)
+,`eksemplar` int(11)
+,`id_anggota` int(11)
+,`no_anggota` varchar(10)
+,`nama` varchar(50)
+,`kelas` varchar(5)
+,`jurusan` varchar(12)
+,`jenis_kelamin` enum('Laki-laki','Perempuan')
+,`tanggal_pinjam` date
+,`id_pengembalian` int(11)
+,`tanggal_pengembalian` date
+,`denda` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_transaksi`
+--
+CREATE TABLE `v_transaksi` (
+`id_peminjaman` int(11)
+,`id_buku` int(11)
+,`judul_buku` varchar(50)
+,`id_kategori` int(11)
+,`nama_kategori` varchar(50)
+,`deskripsi_kategori` text
+,`id_rak` int(11)
+,`nama_rak` varchar(20)
+,`deskripsi_rak` text
+,`tahun` year(4)
+,`stok` int(11)
+,`eksemplar` int(11)
+,`id_anggota` int(11)
+,`no_anggota` varchar(10)
+,`nama` varchar(50)
+,`kelas` varchar(5)
+,`jurusan` varchar(12)
+,`jenis_kelamin` enum('Laki-laki','Perempuan')
+,`tanggal_pinjam` date
+,`id_pengembalian` int(11)
+,`tanggal_pengembalian` date
+,`denda` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_buku`
+--
+DROP TABLE IF EXISTS `v_buku`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_buku`  AS  select `t_buku`.`id_buku` AS `id_buku`,`t_buku`.`judul_buku` AS `judul_buku`,`t_buku`.`id_kategori` AS `id_kategori`,`t_kategori`.`nama_kategori` AS `nama_kategori`,`t_kategori`.`deskripsi_kategori` AS `deskripsi_kategori`,`t_buku`.`id_rak` AS `id_rak`,`t_rak`.`nama_rak` AS `nama_rak`,`t_rak`.`deskripsi_rak` AS `deskripsi_rak`,`t_buku`.`tahun` AS `tahun`,`t_buku`.`stok` AS `stok`,`t_buku`.`eksemplar` AS `eksemplar` from ((`t_buku` join `t_kategori` on((`t_buku`.`id_kategori` = `t_kategori`.`id_kategori`))) join `t_rak` on((`t_buku`.`id_rak` = `t_rak`.`id_rak`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_peminjaman_belum_dikembalikan`
+--
+DROP TABLE IF EXISTS `v_peminjaman_belum_dikembalikan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_peminjaman_belum_dikembalikan`  AS  select `t_peminjaman`.`id_peminjaman` AS `id_peminjaman`,`t_peminjaman`.`id_buku` AS `id_buku`,`t_buku`.`judul_buku` AS `judul_buku`,`t_buku`.`id_kategori` AS `id_kategori`,`t_kategori`.`nama_kategori` AS `nama_kategori`,`t_kategori`.`deskripsi_kategori` AS `deskripsi_kategori`,`t_buku`.`id_rak` AS `id_rak`,`t_rak`.`nama_rak` AS `nama_rak`,`t_rak`.`deskripsi_rak` AS `deskripsi_rak`,`t_buku`.`tahun` AS `tahun`,`t_buku`.`stok` AS `stok`,`t_buku`.`eksemplar` AS `eksemplar`,`t_peminjaman`.`id_anggota` AS `id_anggota`,`t_anggota`.`no_anggota` AS `no_anggota`,`t_anggota`.`nama` AS `nama`,`t_anggota`.`kelas` AS `kelas`,`t_anggota`.`jurusan` AS `jurusan`,`t_anggota`.`jenis_kelamin` AS `jenis_kelamin`,`t_peminjaman`.`tanggal_pinjam` AS `tanggal_pinjam` from ((((`t_peminjaman` join `t_buku` on((`t_peminjaman`.`id_buku` = `t_buku`.`id_buku`))) join `t_kategori` on((`t_buku`.`id_kategori` = `t_kategori`.`id_kategori`))) join `t_rak` on((`t_buku`.`id_rak` = `t_rak`.`id_rak`))) join `t_anggota` on((`t_peminjaman`.`id_anggota` = `t_anggota`.`id_anggota`))) where (not(`t_peminjaman`.`id_peminjaman` in (select `t_pengembalian`.`id_peminjaman` from `t_pengembalian`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_peminjaman_semua`
+--
+DROP TABLE IF EXISTS `v_peminjaman_semua`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_peminjaman_semua`  AS  select `t_peminjaman`.`id_peminjaman` AS `id_peminjaman`,`t_peminjaman`.`id_buku` AS `id_buku`,`t_buku`.`judul_buku` AS `judul_buku`,`t_buku`.`id_kategori` AS `id_kategori`,`t_kategori`.`nama_kategori` AS `nama_kategori`,`t_kategori`.`deskripsi_kategori` AS `deskripsi_kategori`,`t_buku`.`id_rak` AS `id_rak`,`t_rak`.`nama_rak` AS `nama_rak`,`t_rak`.`deskripsi_rak` AS `deskripsi_rak`,`t_buku`.`tahun` AS `tahun`,`t_buku`.`stok` AS `stok`,`t_buku`.`eksemplar` AS `eksemplar`,`t_peminjaman`.`id_anggota` AS `id_anggota`,`t_anggota`.`no_anggota` AS `no_anggota`,`t_anggota`.`nama` AS `nama`,`t_anggota`.`kelas` AS `kelas`,`t_anggota`.`jurusan` AS `jurusan`,`t_anggota`.`jenis_kelamin` AS `jenis_kelamin`,`t_peminjaman`.`tanggal_pinjam` AS `tanggal_pinjam` from ((((`t_peminjaman` join `t_buku` on((`t_peminjaman`.`id_buku` = `t_buku`.`id_buku`))) join `t_kategori` on((`t_buku`.`id_kategori` = `t_kategori`.`id_kategori`))) join `t_rak` on((`t_buku`.`id_rak` = `t_rak`.`id_rak`))) join `t_anggota` on((`t_peminjaman`.`id_anggota` = `t_anggota`.`id_anggota`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_peminjaman_sudah_dikembalikan`
+--
+DROP TABLE IF EXISTS `v_peminjaman_sudah_dikembalikan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_peminjaman_sudah_dikembalikan`  AS  select `t_peminjaman`.`id_peminjaman` AS `id_peminjaman`,`t_peminjaman`.`id_buku` AS `id_buku`,`t_buku`.`judul_buku` AS `judul_buku`,`t_buku`.`id_kategori` AS `id_kategori`,`t_kategori`.`nama_kategori` AS `nama_kategori`,`t_kategori`.`deskripsi_kategori` AS `deskripsi_kategori`,`t_buku`.`id_rak` AS `id_rak`,`t_rak`.`nama_rak` AS `nama_rak`,`t_rak`.`deskripsi_rak` AS `deskripsi_rak`,`t_buku`.`tahun` AS `tahun`,`t_buku`.`stok` AS `stok`,`t_buku`.`eksemplar` AS `eksemplar`,`t_peminjaman`.`id_anggota` AS `id_anggota`,`t_anggota`.`no_anggota` AS `no_anggota`,`t_anggota`.`nama` AS `nama`,`t_anggota`.`kelas` AS `kelas`,`t_anggota`.`jurusan` AS `jurusan`,`t_anggota`.`jenis_kelamin` AS `jenis_kelamin`,`t_peminjaman`.`tanggal_pinjam` AS `tanggal_pinjam`,`t_pengembalian`.`id_pengembalian` AS `id_pengembalian`,`t_pengembalian`.`tanggal_pengembalian` AS `tanggal_pengembalian`,`t_pengembalian`.`denda` AS `denda` from (((((`t_peminjaman` join `t_buku` on((`t_peminjaman`.`id_buku` = `t_buku`.`id_buku`))) join `t_kategori` on((`t_buku`.`id_kategori` = `t_kategori`.`id_kategori`))) join `t_rak` on((`t_buku`.`id_rak` = `t_rak`.`id_rak`))) join `t_anggota` on((`t_peminjaman`.`id_anggota` = `t_anggota`.`id_anggota`))) join `t_pengembalian` on((`t_pengembalian`.`id_peminjaman` = `t_peminjaman`.`id_peminjaman`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_transaksi`
+--
+DROP TABLE IF EXISTS `v_transaksi`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_transaksi`  AS  select `t_peminjaman`.`id_peminjaman` AS `id_peminjaman`,`t_peminjaman`.`id_buku` AS `id_buku`,`t_buku`.`judul_buku` AS `judul_buku`,`t_buku`.`id_kategori` AS `id_kategori`,`t_kategori`.`nama_kategori` AS `nama_kategori`,`t_kategori`.`deskripsi_kategori` AS `deskripsi_kategori`,`t_buku`.`id_rak` AS `id_rak`,`t_rak`.`nama_rak` AS `nama_rak`,`t_rak`.`deskripsi_rak` AS `deskripsi_rak`,`t_buku`.`tahun` AS `tahun`,`t_buku`.`stok` AS `stok`,`t_buku`.`eksemplar` AS `eksemplar`,`t_peminjaman`.`id_anggota` AS `id_anggota`,`t_anggota`.`no_anggota` AS `no_anggota`,`t_anggota`.`nama` AS `nama`,`t_anggota`.`kelas` AS `kelas`,`t_anggota`.`jurusan` AS `jurusan`,`t_anggota`.`jenis_kelamin` AS `jenis_kelamin`,`t_peminjaman`.`tanggal_pinjam` AS `tanggal_pinjam`,`t_pengembalian`.`id_pengembalian` AS `id_pengembalian`,`t_pengembalian`.`tanggal_pengembalian` AS `tanggal_pengembalian`,`t_pengembalian`.`denda` AS `denda` from (((((`t_peminjaman` join `t_buku` on((`t_peminjaman`.`id_buku` = `t_buku`.`id_buku`))) join `t_kategori` on((`t_buku`.`id_kategori` = `t_kategori`.`id_kategori`))) join `t_rak` on((`t_buku`.`id_rak` = `t_rak`.`id_rak`))) join `t_anggota` on((`t_peminjaman`.`id_anggota` = `t_anggota`.`id_anggota`))) left join `t_pengembalian` on((`t_pengembalian`.`id_peminjaman` = `t_peminjaman`.`id_peminjaman`))) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -167,6 +342,12 @@ ALTER TABLE `t_buku`
   ADD PRIMARY KEY (`id_buku`),
   ADD KEY `FK_t_buku_t_kategori` (`id_kategori`),
   ADD KEY `FK_t_buku_t_rak` (`id_rak`);
+
+--
+-- Indexes for table `t_ebook`
+--
+ALTER TABLE `t_ebook`
+  ADD PRIMARY KEY (`id_ebook`);
 
 --
 -- Indexes for table `t_kategori`
@@ -214,17 +395,22 @@ ALTER TABLE `t_admin`
 -- AUTO_INCREMENT for table `t_anggota`
 --
 ALTER TABLE `t_anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `t_buku`
 --
 ALTER TABLE `t_buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `t_ebook`
+--
+ALTER TABLE `t_ebook`
+  MODIFY `id_ebook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `t_kategori`
 --
 ALTER TABLE `t_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `t_konstanta`
 --
@@ -234,17 +420,17 @@ ALTER TABLE `t_konstanta`
 -- AUTO_INCREMENT for table `t_peminjaman`
 --
 ALTER TABLE `t_peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `t_pengembalian`
 --
 ALTER TABLE `t_pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `t_rak`
 --
 ALTER TABLE `t_rak`
-  MODIFY `id_rak` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
