@@ -109,10 +109,10 @@ class T_admin extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('t_admin/update_action'),
-		'id_admin' => set_value('id_admin', $row->id_admin),
-		'user_name' => set_value('user_name', $row->user_name),
-		'password' => set_value('password', $row->password),
-		'status' => set_value('status', $row->status),
+        		'id_admin' => set_value('id_admin', $row->id_admin),
+        		'user_name' => set_value('user_name', $row->user_name),
+        		'password' => set_value('password', $row->password),
+        		'status' => set_value('status', $row->status),
 	    );
             $this->load->view('header');
             $this->load->view('t_admin/t_admin_form', $data);

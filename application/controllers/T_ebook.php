@@ -86,7 +86,7 @@ class T_ebook extends CI_Controller
             'nama_ebook' => $row->nama_ebook,
             'tempat_ebook' => $row->tempat_ebook,
         );
-            $this->load->view('view_pdf', $data);
+            $this->load->view('t_ebook/view_pdf', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t_ebook'));

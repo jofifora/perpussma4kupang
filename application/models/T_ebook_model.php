@@ -31,7 +31,7 @@ class T_ebook_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-	$this->db->or_like('nama_ebook', $q);
+	$this->db->like('nama_ebook', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -39,7 +39,7 @@ class T_ebook_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-    	$this->db->or_like('nama_ebook', $q);
+    	$this->db->like('nama_ebook', $q);
     	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

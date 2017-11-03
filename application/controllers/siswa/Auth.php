@@ -18,40 +18,40 @@ class Auth extends CI_Controller {
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
         if ($this->form_validation->run() == true)
         {
-            $this->load->model('auth_model', 'auth');  
+            $this->load->model('siswa/auth_model', 'auth');  
             // check the username & password of user
             $status = $this->auth->validate();
             if ($status == "ERR_INVALID_USERNAME") {
-                $this->session->set_flashdata("error", "Username salah");
+                $this->session->set_flashdata("error", "No. Anggota salah");
             }
             elseif ($status == "ERR_INVALID_PASSWORD") {
-                $this->session->set_flashdata("error", "Password salah");
+                $this->session->set_flashdata("error", "Password is invalid");
             }
             else
             {
                 // success
                 // store the user data to session
                 $this->session->set_userdata($this->auth->get_data());
-                $this->session->set_userdata("logged_in", true);
+                $this->session->set_userdata("siswa_logged_in", true);
                 // redirect to dashboard
-                redirect("Halaman_awal");
+                redirect("siswa/Halaman_awal");
             }
         }
        
-        $this->load->view("auth");
+        $this->load->view("siswa/auth");
     } 
 
     public function logged_in_check()
     {
-        if ($this->session->userdata("logged_in")) {
-            redirect("Halaman_awal");
+        if ($this->session->userdata("siswa_logged_in")) {
+            redirect("siswa/Halaman_awal");
         }
     }
  
     public function logout()
     {
-        $this->session->unset_userdata("logged_in");
+        $this->session->unset_userdata("siswa_logged_in");
         $this->session->sess_destroy();
-        redirect("Auth");
+        redirect("siswa/Auth");
     }
 }

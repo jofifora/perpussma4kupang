@@ -9,7 +9,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/cssBeta.css') ?>"/>
-    <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap-datepicker.min.css') ?>"/>
 
   </head>
 
@@ -27,27 +26,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<?php echo base_url('halaman_awal'); ?>">Perpustakaan SMA 4 Kupang</a>
+          <a class="navbar-brand" href="<?php echo base_url('siswa/halaman_awal'); ?>">Perpustakaan SMA 4 Kupang</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="<?php echo base_url('t_buku'); ?>">Buku <span class="sr-only">(current)</span></a></li>
-            <li><a href="<?php echo base_url('t_ebook'); ?>">E-Book</a></li>
-            <li><a href="<?php echo base_url('t_anggota'); ?>">Anggota</a></li>
-            <li><a href="<?php echo base_url('v_transaksi'); ?>">Data Transaksi</a></li>
+            <li><a href="<?php echo base_url('siswa/t_buku'); ?>">Buku <span class="sr-only">(current)</span></a></li>
+            <li><a href="<?php echo base_url('siswa/t_ebook'); ?>">E-Book</a></li>
+            <li><a href="<?php echo base_url('siswa/t_peminjaman'); ?>">Data Peminjaman</a></li>
           </ul>
-          <form class="navbar-form navbar-left" action="<?php echo base_url()."t_anggota/index.html" ?>" method="get">
-            <div class="form-group">
-              <input type="text" class="form-control" name="no_anggota" placeholder="No. Anggota">
-            </div>
-            <button type="submit" class="btn btn-default">Cari</button>
-          </form>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php echo base_url('t_rak'); ?>">Rak</a></li>
-            <li><a href="<?php echo base_url('t_kategori'); ?>">Kategori</a></li>
-            <li><a href="<?php echo base_url('auth/logout'); ?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Keluar</a></li>
+            <li><a href="<?php echo base_url('siswa/auth/logout'); ?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Keluar</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
