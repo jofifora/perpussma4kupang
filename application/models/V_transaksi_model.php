@@ -23,6 +23,12 @@ class V_transaksi_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_anggota_by_no_anggota($no_anggota)
+    {
+        $this->db->where('no_anggota', $no_anggota);
+        return $this->db->get('t_anggota')->row();
+    }
+
     // get data by id
     function get_by_id($id)
     {

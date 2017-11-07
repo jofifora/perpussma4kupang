@@ -3,11 +3,15 @@
         <form action="<?php echo $action; ?>" method="post" class="form-input">
 	    <div class="form-group">
             <label for="varchar">No Anggota <?php echo form_error('no_anggota') ?></label>
-            <input type="text" class="form-control" name="no_anggota" id="no_anggota" placeholder="No Anggota" value="<?php echo $no_anggota; ?>" />
+            <input type="text" class="form-control" name="no_anggota" id="no_anggota" placeholder="No Anggota" <?php echo (trim($button)=='Update') ? 'readonly' : '' ;  ?> value="<?php echo $no_anggota; ?>" />
         </div>
 	    <div class="form-group">
             <label for="varchar">Nama <?php echo form_error('nama') ?></label>
             <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<?php echo $nama; ?>" />
+        </div>
+        <div class="form-group">
+            <label for="varchar">Tanggal Lahir <?php echo form_error('password') ?></label>
+            <input type="text" class="form-control tanggal" name="password" id="password" placeholder="Tanggal Lahir" value="<?php echo $password; ?>" />
         </div>
 	    <div class="form-group">
             <label for="varchar">Kelas <?php echo form_error('kelas') ?></label>
@@ -23,10 +27,6 @@
                 <option value="Laki-laki" <?php echo ($jenis_kelamin == "Laki-laki") ? ("selected") : ("") ;?> >Laki-laki</option>
                 <option value="Perempuan" <?php echo ($jenis_kelamin == "Perempuan") ? ("selected") : ("") ;?> >Perempuan</option>
             </select>
-        </div>
-	    <div class="form-group">
-            <label for="varchar">Password <?php echo form_error('password') ?></label>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
         </div>
 	    <input type="hidden" name="id_anggota" value="<?php echo $id_anggota; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

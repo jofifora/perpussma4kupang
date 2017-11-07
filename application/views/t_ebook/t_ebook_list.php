@@ -32,7 +32,7 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Judul Ebook</th>
+		<th>Judul Buku</th>
 		<th>Action</th>
             </tr><?php
             foreach ($t_ebook_data as $t_ebook)

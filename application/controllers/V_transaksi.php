@@ -50,6 +50,16 @@ class V_transaksi extends CI_Controller
 
         $start = intval($this->input->get('start'));
 
+        if (trim($no_a)<>'') {
+            $row_anggota = $this->V_transaksi_model->get_anggota_by_no_anggota($no_a);
+            if ($row_anggota) {
+                $nm = $row_anggota->nama;
+                $kl = $row_anggota->kelas;
+                $jr = $row_anggota->jurusan;
+                $jk = $row_anggota->jenis_kelamin;
+            }
+        }
+
         $config['base_url'] = base_url() . 'v_transaksi/index.html';
         $config['first_url'] = base_url() . 'v_transaksi/index.html';
 

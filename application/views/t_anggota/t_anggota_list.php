@@ -70,6 +70,7 @@
                 <th>No</th>
 		<th>No Anggota</th>
 		<th>Nama</th>
+        <th>Tgl. Lahir</th>
 		<th>Kelas</th>
 		<th>Jurusan</th>
 		<th>Jenis Kelamin</th>
@@ -82,6 +83,7 @@
 			<td width="80px"><?php echo ++$start ?></td>
 			<td><?php echo $t_anggota->no_anggota ?></td>
 			<td><?php echo $t_anggota->nama ?></td>
+            <td><?php echo $t_anggota->password ?></td>
 			<td><?php echo $t_anggota->kelas ?></td>
 			<td><?php echo $t_anggota->jurusan ?></td>
 			<td><?php echo $t_anggota->jenis_kelamin ?></td>

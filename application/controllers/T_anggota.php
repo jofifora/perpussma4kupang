@@ -229,7 +229,7 @@ class T_anggota extends CI_Controller
             $referred_from = site_url('t_anggota');
         }
 
-        $this->_rules();
+        $this->rulesUpdate();
 
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id_anggota', TRUE));
@@ -269,6 +269,19 @@ class T_anggota extends CI_Controller
             //redirect(site_url('t_anggota'));
             redirect($referred_from);
         }
+    }
+
+    public function rulesUpdate() 
+    {
+    $this->form_validation->set_rules('no_anggota', 'no anggota', 'trim|required');
+    $this->form_validation->set_rules('nama', 'nama', 'trim|required');
+    $this->form_validation->set_rules('kelas', 'kelas', 'trim|required');
+    $this->form_validation->set_rules('jurusan', 'jurusan', 'trim|required');
+    $this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
+    $this->form_validation->set_rules('password', 'password', 'trim|required');
+
+    $this->form_validation->set_rules('id_anggota', 'id_anggota', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function _rules() 
